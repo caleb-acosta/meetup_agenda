@@ -4,8 +4,16 @@ defmodule MeetupAgendaWeb.EventLiveTest do
   import Phoenix.LiveViewTest
   import MeetupAgenda.AgendaServiceFixtures
 
-  @create_attrs %{description: "some description", event_date: %{day: 10, month: 7, year: 2022}, title: "some title"}
-  @update_attrs %{description: "some updated description", event_date: %{day: 11, month: 7, year: 2022}, title: "some updated title"}
+  @create_attrs %{
+    description: "some description",
+    event_date: %{day: 10, month: 7, year: 2022},
+    title: "some title"
+  }
+  @update_attrs %{
+    description: "some updated description",
+    event_date: %{day: 11, month: 7, year: 2022},
+    title: "some updated title"
+  }
   @invalid_attrs %{description: nil, event_date: %{day: 30, month: 2, year: 2022}, title: nil}
 
   defp create_event(_) do

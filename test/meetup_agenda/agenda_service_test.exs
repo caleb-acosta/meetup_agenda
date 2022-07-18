@@ -21,7 +21,11 @@ defmodule MeetupAgenda.AgendaServiceTest do
     end
 
     test "create_event/1 with valid data creates a event" do
-      valid_attrs = %{description: "some description", event_date: ~D[2022-07-10], title: "some title"}
+      valid_attrs = %{
+        description: "some description",
+        event_date: ~D[2022-07-10],
+        title: "some title"
+      }
 
       assert {:ok, %Event{} = event} = AgendaService.create_event(valid_attrs)
       assert event.description == "some description"
@@ -35,7 +39,12 @@ defmodule MeetupAgenda.AgendaServiceTest do
 
     test "update_event/2 with valid data updates the event" do
       event = event_fixture()
-      update_attrs = %{description: "some updated description", event_date: ~D[2022-07-11], title: "some updated title"}
+
+      update_attrs = %{
+        description: "some updated description",
+        event_date: ~D[2022-07-11],
+        title: "some updated title"
+      }
 
       assert {:ok, %Event{} = event} = AgendaService.update_event(event, update_attrs)
       assert event.description == "some updated description"

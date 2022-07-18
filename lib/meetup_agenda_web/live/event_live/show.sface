@@ -1,0 +1,21 @@
+<div>
+<ul>
+  <li>
+    <strong>Title:</strong>
+    { @event.title }
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    { @event.description }
+  </li>
+
+  <li>
+    <strong>Event date:</strong>
+    { @event.event_date }
+  </li>
+
+</ul>
+
+<span><LivePatch to={Routes.event_index_path(@socket, :edit, @event)} class="button is-primary">Edit</LivePatch></span>
+</div>

@@ -1,0 +1,49 @@
+{#if @live_action in [:new, :edit]}
+<Modal.Card show={true}>
+  <Modal.Header>
+    Title
+  </Modal.Header>
+  <FormComponent action={@live_action} id={:form} event={@event |> IO.inspect()}/>
+</Modal.Card>
+{/if}
+
+{#if @live_action in [:show]}
+<Modal.Card show={true}>
+  <Modal.Header>
+    {@event.title}
+  </Modal.Header>
+  <Show id={:show} event={@event}/>
+</Modal.Card>
+{/if}
+
+<Panel id={:panel}>
+  <:title>Meetup Agenda</:title>
+  <Tab title="Agenda">
+     <TabItem>	
+       <span class="is-size-3 has-text-grey-dark">{@filter_month.month} {@filter_month.year}</span>
+     </TabItem>
+     <TabItem>
+       <Table class="mx-5 is-fullwidth" id={:agenda_table} data={event <- @events}>
+         <Column label="Day">
+           {event.event_date.day}
+         </Column>
+          <Column label="Month">
+           {event.event_date.month}
+         </Column>
+          <Column label="Title">
+           <LivePatch to={ Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch>
+         </Column>
+	 <Column label="Actions">
+	   <LivePatch to={ Routes.event_index_path(@socket, :edit, event)}>Edit</LivePatch>
+           <Link to="#" click="delete" values={id: event.id}>Delete</Link>
+         </Column>
+       </Table>	
+     </TabItem>
+  </Tab>
+  <Tab title="Calendar" click="switch_tab">
+    <TabItem>
+       Calendar
+    </TabItem>
+  </Tab>
+</Panel>
+<span><LivePatch to={ Routes.event_index_path(@socket, :new)}>New Event</LivePatch></span>

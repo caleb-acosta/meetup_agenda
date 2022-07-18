@@ -55,11 +55,12 @@ config :meetup_agenda, MeetupAgendaWeb.Endpoint,
 
 # Watch static and templates for browser reloading.
 config :meetup_agenda, MeetupAgendaWeb.Endpoint,
+  reloadable_compilers: [:gettext, :elixir, :surface],
   live_reload: [
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
-      ~r"lib/meetup_agenda_web/(live|views)/.*(ex)$",
+      ~r"lib/meetup_agenda_web/(live|views|components)/.*(ex|sface|js)$",
       ~r"lib/meetup_agenda_web/templates/.*(eex)$"
     ]
   ]
