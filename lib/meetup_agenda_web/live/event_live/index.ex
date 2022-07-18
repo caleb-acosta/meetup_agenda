@@ -7,7 +7,7 @@ defmodule MeetupAgendaWeb.EventLive.Index do
   alias SurfaceBulma.{Panel, Modal, Button}
   alias SurfaceBulma.Panel.{Tab, Tab.TabItem}
   alias MeetupAgendaWeb.Router.Helpers, as: Routes
-  alias MeetupAgendaWeb.EventLive.{Show, FormComponent, Agenda}
+  alias MeetupAgendaWeb.EventLive.{Show, FormComponent, Agenda, Calendar}
 
   data(today, :integer, default: Timex.today())
   data(events, :list, default: [])
