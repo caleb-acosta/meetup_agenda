@@ -1,0 +1,16 @@
+<Table class="mx-5 is-fullwidth" id={:agenda_table} data={event <- @events}>
+  <Column label="Day">
+    {event.event_date.day}
+  </Column>
+  <Column label="Month">
+    {event.event_date.month}
+  </Column>
+  <Column label="Title">
+    <LivePatch to={ Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch>
+  </Column>
+  <Column label="Actions">
+    <LivePatch to={ Routes.event_index_path(@socket, :edit, event)}>Edit</LivePatch>
+    <Link to="#" click="delete" values={id: event.id}>Delete</Link>
+  </Column>
+</Table>	
+

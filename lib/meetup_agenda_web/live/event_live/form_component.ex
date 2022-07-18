@@ -33,7 +33,7 @@ defmodule MeetupAgendaWeb.EventLive.FormComponent do
         {:noreply,
          socket
          |> put_flash(:info, "Event created successfully")
-         |> push_redirect(to: MeetupAgendaWeb.Router.Helpers.event_index_path(socket, :index))}
+         |> push_patch(to: MeetupAgendaWeb.Router.Helpers.event_index_path(socket, :index))}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, changeset: changeset)}

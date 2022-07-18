@@ -21,6 +21,14 @@ defmodule MeetupAgenda.AgendaService do
     Repo.all(Event)
   end
 
+  def list_events_by(:month, year, month) do
+    Repo.all(
+      from e in Event, 
+      where: e.event_date > ^Timex.beginning_of_month(year, month),
+      where: e.event_date < ^Timex.end_of_month(year, month)) 
+  end
+
+
   @doc """
   Gets a single event.
 
