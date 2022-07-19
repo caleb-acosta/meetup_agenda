@@ -11,7 +11,6 @@ defmodule MeetupAgendaWeb.EventLive.Calendar do
 
 
   defp weeks_in_month(events, year, month) do
-    IO.inspect(events)
     Date.range(Timex.beginning_of_month(year, month), Timex.end_of_month(year, month)) 
     |> Enum.map(fn day -> 
       {day, Enum.filter(events, &(&1.event_date == day))}

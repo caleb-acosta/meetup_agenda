@@ -118,3 +118,9 @@
   0% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+.float{
+  position:fixed;
+  bottom:40px;
+  right:40px;
+}

@@ -16,4 +16,14 @@ defmodule MeetupAgenda.AgendaService.Event do
     |> cast(attrs, [:title, :description, :event_date])
     |> validate_required([:title, :description, :event_date])
   end
+ 
+  @doc """
+   Strict changeset validation that doesn't allow duplicated event dates
+  """
+  def changeset(event, :strict, attrs) do
+    event
+    |> cast(attrs, [:title, :description, :event_date])
+    |> validate_required([:title, :description, :event_date])
+    |> unsafe_validate_unique(:event_date, MeetupAgenda.Repo)
+  end 
 end

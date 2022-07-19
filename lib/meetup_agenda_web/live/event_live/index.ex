@@ -4,7 +4,7 @@ defmodule MeetupAgendaWeb.EventLive.Index do
   alias MeetupAgenda.AgendaService
   alias MeetupAgenda.AgendaService.Event
   alias Surface.Components.LivePatch
-  alias SurfaceBulma.{Panel, Modal, Button}
+  alias SurfaceBulma.{Panel, Modal, Button, Form.Checkbox}
   alias SurfaceBulma.Panel.{Tab, Tab.TabItem}
   alias MeetupAgendaWeb.Router.Helpers, as: Routes
   alias MeetupAgendaWeb.EventLive.{Show, FormComponent, Agenda, Calendar}
@@ -12,7 +12,7 @@ defmodule MeetupAgendaWeb.EventLive.Index do
   data(today, :integer, default: Timex.today())
   data(events, :list, default: [])
   data(event, :map, default: %Event{})
-
+  data(strict, :boolean, default: false)
   data(filter_month, :map,
     default: %{month: Timex.today().month, year: Timex.today().year}
   )
@@ -60,6 +60,8 @@ defmodule MeetupAgendaWeb.EventLive.Index do
   end
 
   def handle_event("modal_close", _, socket), do: {:noreply, assign(socket, live_action: :index)}
+
+  def handle_event("strict_mode", _, socket), do: {:noreply, assign(socket, :strict, !socket.assigns.strict)}
 
   def handle_event("prev_month", _, socket) do
     filter_month = cond do

@@ -9,13 +9,20 @@ defmodule MeetupAgendaWeb.EventLive.FormComponent do
   data changeset, :any, default: AgendaService.change_event(%Event{})
   prop action, :atom, default: :edit
   prop event, :map, default: %Event{event_date: Timex.today()}
+  prop strict, :boolean
 
   def handle_event("save", %{"event" => event_params}, socket) do
     save_event(socket, socket.assigns.action, order_params(event_params))
   end
 
   defp save_event(socket, :edit, event_params) do
-    case AgendaService.update_event(socket.assigns.event, event_params) do
+    changeset = 
+      if socket.assigns.strict do
+        AgendaService.update_event_strict(socket.assigns.event, event_params)
+      else
+        AgendaService.update_event(socket.assigns.event, event_params)
+      end
+    case changeset do
       {:ok, _event} ->
         {:noreply,
          socket
@@ -28,7 +35,13 @@ defmodule MeetupAgendaWeb.EventLive.FormComponent do
   end
 
   defp save_event(socket, :new, event_params) do
-    case AgendaService.create_event(event_params) do
+    changeset = 
+      if socket.assigns.strict do
+        AgendaService.create_event_strict(event_params)
+      else
+        AgendaService.create_event(event_params)
+      end
+    case changeset do
       {:ok, _event} ->
         {:noreply,
          socket

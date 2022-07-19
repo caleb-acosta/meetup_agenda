@@ -28,6 +28,12 @@ defmodule MeetupAgenda.AgendaService do
       where: e.event_date < ^Timex.end_of_month(year, month)) 
   end
 
+  def list_events_by(:date, date) do
+    Repo.all(
+      from e in Event,
+      where: e.event_date == ^date
+    )
+  end
 
   @doc """
   Gets a single event.
@@ -63,6 +69,12 @@ defmodule MeetupAgenda.AgendaService do
     |> Repo.insert()
   end
 
+  def create_event_strict(attrs \\ %{}) do
+    %Event{}
+    |> Event.changeset(:strict, attrs)
+    |> Repo.insert()
+  end
+
   @doc """
   Updates a event.
 
@@ -80,6 +92,13 @@ defmodule MeetupAgenda.AgendaService do
     |> Event.changeset(attrs)
     |> Repo.update()
   end
+
+  def update_event_strict(%Event{} = event, attrs) do
+    event
+    |> Event.changeset(:strict, attrs)
+    |> Repo.update()
+  end
+
 
   @doc """
   Deletes a event.
