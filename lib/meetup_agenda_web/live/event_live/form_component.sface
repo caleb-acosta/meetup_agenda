@@ -1,27 +1,44 @@
 <div>
-  <Form
-    for={@changeset}
-    submit="save">
+  <Form for={@changeset} submit="save">
     <div class="is-flex is-flex-direction-column">
+      <Label field={:title} />
+      <TextInput field={:title} value={@event.title} />
+      <ErrorTag field={:title} />
 
-      <Label field={:title}/> 
-      <TextInput field={:title} value={@event.title}/>
-      <ErrorTag field={:title}/>
-  
-      <Label field={:description}/>
-      <TextInput field={:description} value={@event.description}/>
-      <ErrorTag field={:description}/>
-      
-      <div class="is-flex is-justify-content-center mt-4">  
-        <Select options={"First": 1, "Second": 2, "Third": 3, "Fourth": 4, "Fifth": 5 } field={:ordinal_day} class="select mx-2" selected={ordinal_weekday(@event.event_date)}/>
-        
-        <Select options={Enum.map(1..7, &({Timex.day_name(&1), &1}))} field={:day} class="select mx-2" selected={Timex.weekday(@event.event_date)}/>
-   
-        <Select options={Enum.map(1..12, &({Timex.month_name(&1), &1}))} field={:month} class="select mx-2" selected={@event.event_date.month}/>
-  
-        <Select options={Timex.today.year..Timex.today.year+10} field={:year} class="select is-info mx-2" selected={@event.event_date.year}/>
+      <Label field={:description} />
+      <TextInput field={:description} value={@event.description} />
+      <ErrorTag field={:description} />
+
+      <div class="is-flex is-justify-content-center mt-4">
+        <Select
+          options={First: 1, Second: 2, Third: 3, Fourth: 4, Fifth: 5}
+          field={:ordinal_day}
+          class="select mx-2"
+          selected={ordinal_weekday(@event.event_date)}
+        />
+
+        <Select
+          options={Enum.map(1..7, &{Timex.day_name(&1), &1})}
+          field={:day}
+          class="select mx-2"
+          selected={Timex.weekday(@event.event_date)}
+        />
+
+        <Select
+          options={Enum.map(1..12, &{Timex.month_name(&1), &1})}
+          field={:month}
+          class="select mx-2"
+          selected={@event.event_date.month}
+        />
+
+        <Select
+          options={Timex.today().year..(Timex.today().year + 10)}
+          field={:year}
+          class="select is-info mx-2"
+          selected={@event.event_date.year}
+        />
       </div>
-      <ErrorTag field={:event_date}/>
+      <ErrorTag field={:event_date} />
     </div>
     <Submit class="button is-info mt-4" opts={[action: :new]}>Save</Submit>
   </Form>

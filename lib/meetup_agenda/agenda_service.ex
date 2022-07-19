@@ -23,15 +23,16 @@ defmodule MeetupAgenda.AgendaService do
 
   def list_events_by(:month, year, month) do
     Repo.all(
-      from e in Event, 
-      where: e.event_date > ^Timex.beginning_of_month(year, month),
-      where: e.event_date < ^Timex.end_of_month(year, month)) 
+      from e in Event,
+        where: e.event_date > ^Timex.beginning_of_month(year, month),
+        where: e.event_date < ^Timex.end_of_month(year, month)
+    )
   end
 
   def list_events_by(:date, date) do
     Repo.all(
       from e in Event,
-      where: e.event_date == ^date
+        where: e.event_date == ^date
     )
   end
 
@@ -98,7 +99,6 @@ defmodule MeetupAgenda.AgendaService do
     |> Event.changeset(:strict, attrs)
     |> Repo.update()
   end
-
 
   @doc """
   Deletes a event.

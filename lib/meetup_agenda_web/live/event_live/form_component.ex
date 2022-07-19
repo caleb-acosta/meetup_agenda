@@ -16,12 +16,13 @@ defmodule MeetupAgendaWeb.EventLive.FormComponent do
   end
 
   defp save_event(socket, :edit, event_params) do
-    changeset = 
+    changeset =
       if socket.assigns.strict do
         AgendaService.update_event_strict(socket.assigns.event, event_params)
       else
         AgendaService.update_event(socket.assigns.event, event_params)
       end
+
     case changeset do
       {:ok, _event} ->
         {:noreply,
@@ -35,12 +36,13 @@ defmodule MeetupAgendaWeb.EventLive.FormComponent do
   end
 
   defp save_event(socket, :new, event_params) do
-    changeset = 
+    changeset =
       if socket.assigns.strict do
         AgendaService.create_event_strict(event_params)
       else
         AgendaService.create_event(event_params)
       end
+
     case changeset do
       {:ok, _event} ->
         {:noreply,

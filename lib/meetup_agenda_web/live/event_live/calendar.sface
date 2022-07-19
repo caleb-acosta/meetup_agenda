@@ -1,93 +1,93 @@
 <div class="container">
-<Table id={:calendar_table} data={week <- weeks_in_month(@events, @month.year, @month.month)}>
+  <Table id={:calendar_table} data={week <- weeks_in_month(@events, @month.year, @month.month)}>
+    <Column label="Monday">
+      {#if Map.get(week, 1) != nil}
+        <div class="is-flex is-flex-direction-column">
+          <span>{elem(Map.get(week, 1), 0).day}</span>
+          <ul>
+            {#for event <- elem(Map.get(week, 1), 1)}
+              <li><LivePatch to={Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
+            {/for}
+          </ul>
+        </div>
+      {/if}
+    </Column>
 
-  <Column label="Monday">
-    {#if Map.get(week, 1) != nil}
-      <div class="is-flex is-flex-direction-column">
-        <span>{elem(Map.get(week, 1), 0).day}</span>
-        <ul>
-          {#for event <- elem(Map.get(week, 1), 1)}
-           <li><LivePatch to={ Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
-          {/for}
-        </ul>
-      </div>
-    {/if}
-  </Column>
+    <Column label="Tuesday">
+      {#if Map.get(week, 2) != nil}
+        <div class="is-flex is-flex-direction-column">
+          <span>{elem(Map.get(week, 2), 0).day}</span>
+          <ul>
+            {#for event <- elem(Map.get(week, 2), 1)}
+              <li><LivePatch to={Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
+            {/for}
+          </ul>
+        </div>
+      {/if}
+    </Column>
 
-  <Column label="Tuesday">
-    {#if Map.get(week, 2) != nil}
-      <div class="is-flex is-flex-direction-column">
-        <span>{elem(Map.get(week, 2), 0).day}</span>
-        <ul>
-          {#for event <- elem(Map.get(week, 2), 1)}
-           <li><LivePatch to={ Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
-          {/for}
-        </ul>
-      </div>
-    {/if}
-  </Column>
+    <Column label="Wednesday">
+      {#if Map.get(week, 3) != nil}
+        <div class="is-flex is-flex-direction-column">
+          <span>{elem(Map.get(week, 3), 0).day}</span>
+          <ul>
+            {#for event <- elem(Map.get(week, 3), 1)}
+              <li><LivePatch to={Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
+            {/for}
+          </ul>
+        </div>
+      {/if}
+    </Column>
 
-  <Column label="Wednesday">
-    {#if Map.get(week, 3) != nil}
-      <div class="is-flex is-flex-direction-column">
-        <span>{elem(Map.get(week, 3), 0).day}</span>
-        <ul>
-          {#for event <- elem(Map.get(week, 3), 1)}
-           <li><LivePatch to={ Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
-          {/for}
-        </ul>
-      </div>
-    {/if}
-  </Column>
+    <Column label="Thursday">
+      {#if Map.get(week, 4) != nil}
+        <div class="is-flex is-flex-direction-column">
+          <span>{elem(Map.get(week, 4), 0).day}</span>
+          <ul>
+            {#for event <- elem(Map.get(week, 4), 1)}
+              <li><LivePatch to={Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
+            {/for}
+          </ul>
+        </div>
+      {/if}
+    </Column>
 
-  <Column label="Thursday">
-    {#if Map.get(week, 4) != nil}
-      <div class="is-flex is-flex-direction-column">
-        <span>{elem(Map.get(week, 4), 0).day}</span>
-        <ul>
-          {#for event <- elem(Map.get(week, 4), 1)}
-           <li><LivePatch to={ Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
-          {/for}
-        </ul>
-      </div>
-    {/if}
-  </Column>
+    <Column label="Friday">
+      {#if Map.get(week, 5) != nil}
+        <div class="is-flex is-flex-direction-column">
+          <span>{elem(Map.get(week, 5), 0).day}</span>
+          <ul>
+            {#for event <- elem(Map.get(week, 5), 1)}
+              <li><LivePatch to={Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
+            {/for}
+          </ul>
+        </div>
+      {/if}
+    </Column>
 
-  <Column label="Friday">
-    {#if Map.get(week, 5) != nil}
-      <div class="is-flex is-flex-direction-column">
-        <span>{elem(Map.get(week, 5), 0).day}</span>
-        <ul>
-          {#for event <- elem(Map.get(week, 5), 1)}
-           <li><LivePatch to={ Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
-          {/for}
-        </ul>
-      </div>
-    {/if} </Column>
+    <Column label="Saturday">
+      {#if Map.get(week, 6) != nil}
+        <div class="is-flex is-flex-direction-column">
+          <span>{elem(Map.get(week, 6), 0).day}</span>
+          <ul>
+            {#for event <- elem(Map.get(week, 6), 1)}
+              <li><LivePatch to={Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
+            {/for}
+          </ul>
+        </div>
+      {/if}
+    </Column>
 
-  <Column label="Saturday">
-     {#if Map.get(week, 6) != nil}
-      <div class="is-flex is-flex-direction-column">
-        <span>{elem(Map.get(week, 6), 0).day}</span>
-        <ul>
-          {#for event <- elem(Map.get(week, 6), 1)}
-           <li><LivePatch to={ Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
-          {/for}
-        </ul>
-      </div>
-    {/if} </Column>
-
-  <Column label="Sunday">
+    <Column label="Sunday">
       {#if Map.get(week, 7) != nil}
-      <div class="is-flex is-flex-direction-column">
-        <span>{elem(Map.get(week, 7), 0).day}</span>
-        <ul>
-          {#for event <- elem(Map.get(week, 7), 1)}
-           <li><LivePatch to={ Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
-          {/for}
-        </ul>
-      </div>
-    {/if}</Column>
-
-</Table>
+        <div class="is-flex is-flex-direction-column">
+          <span>{elem(Map.get(week, 7), 0).day}</span>
+          <ul>
+            {#for event <- elem(Map.get(week, 7), 1)}
+              <li><LivePatch to={Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch></li>
+            {/for}
+          </ul>
+        </div>
+      {/if}</Column>
+  </Table>
 </div>

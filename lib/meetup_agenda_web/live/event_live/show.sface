@@ -1,21 +1,20 @@
 <div>
-<ul>
-  <li>
-    <strong>Title:</strong>
-    { @event.title }
-  </li>
+  <ul>
+    <li>
+      <strong>Title:</strong>
+      {@event.title}
+    </li>
 
-  <li>
-    <strong>Description:</strong>
-    { @event.description }
-  </li>
+    <li>
+      <strong>Description:</strong>
+      {@event.description}
+    </li>
 
-  <li>
-    <strong>Event date:</strong>
-    { @event.event_date }
-  </li>
+    <li>
+      <strong>Event date:</strong>
+      {@event.event_date}
+    </li>
+  </ul>
 
-</ul>
-
-<span><LivePatch to={Routes.event_index_path(@socket, :edit, @event)} class="button is-primary">Edit</LivePatch></span>
+  <span><LivePatch to={Routes.event_index_path(@socket, :edit, @event)} class="button is-primary">Edit</LivePatch></span>
 </div>

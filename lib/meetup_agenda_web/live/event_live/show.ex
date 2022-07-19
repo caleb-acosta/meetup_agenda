@@ -3,6 +3,6 @@ defmodule MeetupAgendaWeb.EventLive.Show do
 
   alias Surface.Components.LivePatch
   alias MeetupAgendaWeb.Router.Helpers, as: Routes
-  
+
   prop event, :map
 end

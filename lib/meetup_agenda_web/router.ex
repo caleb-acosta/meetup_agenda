@@ -18,7 +18,7 @@ defmodule MeetupAgendaWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
-    
+
     live "/test", EventLive.TestPage
     live "/events", EventLive.Index, :index
     live "/events/new", EventLive.Index, :new

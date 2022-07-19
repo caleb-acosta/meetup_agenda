@@ -1,17 +1,22 @@
 <div class="container">
-<Table class="mx-5 is-fullwidth" id={:agenda_table} data={event <- @events}>
-  <Column label="Day">
-    {event.event_date.day}
-  </Column>
-  <Column label="Month">
-    {event.event_date.month |> Timex.month_name()}
-  </Column>
-  <Column label="Title">
-    <LivePatch to={ Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch>
-  </Column>
-  <Column label="Actions">
-    <LivePatch class="button is-info is-small" to={ Routes.event_index_path(@socket, :edit, event)}>Edit</LivePatch>
-    <Link class="button is-danger is-small" to="#" click={"delete", target: :live_view} values={id: event.id}>Delete</Link>
-  </Column>
-</Table>	
+  <Table class="mx-5 is-fullwidth" id={:agenda_table} data={event <- @events}>
+    <Column label="Day">
+      {event.event_date.day}
+    </Column>
+    <Column label="Month">
+      {event.event_date.month |> Timex.month_name()}
+    </Column>
+    <Column label="Title">
+      <LivePatch to={Routes.event_index_path(@socket, :show, event)}>{event.title}</LivePatch>
+    </Column>
+    <Column label="Actions">
+      <LivePatch class="button is-info is-small" to={Routes.event_index_path(@socket, :edit, event)}>Edit</LivePatch>
+      <Link
+        class="button is-danger is-small"
+        to="#"
+        click={"delete", target: :live_view}
+        values={id: event.id}
+      >Delete</Link>
+    </Column>
+  </Table>
 </div>

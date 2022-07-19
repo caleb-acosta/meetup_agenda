@@ -1,5 +1,5 @@
 defmodule MeetupAgendaWeb.EventLive.Calendar do
- use Surface.LiveComponent
+  use Surface.LiveComponent
 
   alias SurfaceBulma.Table
   alias SurfaceBulma.Table.Column
@@ -9,15 +9,14 @@ defmodule MeetupAgendaWeb.EventLive.Calendar do
   prop events, :list
   prop month, :map
 
-
   defp weeks_in_month(events, year, month) do
-    Date.range(Timex.beginning_of_month(year, month), Timex.end_of_month(year, month)) 
-    |> Enum.map(fn day -> 
+    Date.range(Timex.beginning_of_month(year, month), Timex.end_of_month(year, month))
+    |> Enum.map(fn day ->
       {day, Enum.filter(events, &(&1.event_date == day))}
     end)
-    |> Enum.chunk_by(&(Timex.week_of_month(elem(&1, 0)))) 
-    |> Enum.map(fn week -> 
-      Enum.reduce(week, %{}, &(Map.put(&2, Timex.weekday(elem(&1, 0)), &1)))  
+    |> Enum.chunk_by(&Timex.week_of_month(elem(&1, 0)))
+    |> Enum.map(fn week ->
+      Enum.reduce(week, %{}, &Map.put(&2, Timex.weekday(elem(&1, 0)), &1))
     end)
   end
 end
