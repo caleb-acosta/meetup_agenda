@@ -1,4 +1,9 @@
 defmodule MeetupAgenda.AgendaService.Event do
+  
+  @moduledoc """
+  Event Ecto Schema.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

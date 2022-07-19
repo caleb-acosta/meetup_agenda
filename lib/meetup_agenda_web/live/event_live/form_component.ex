@@ -1,4 +1,9 @@
 defmodule MeetupAgendaWeb.EventLive.FormComponent do
+ 
+  @moduledoc """
+    Form SurfaceComponent for MeetupAgenda.AgendaService.Event
+  """
+
   use Surface.LiveComponent
 
   alias MeetupAgenda.AgendaService

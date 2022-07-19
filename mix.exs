@@ -58,7 +58,8 @@ defmodule MeetupAgenda.MixProject do
       {:surface, "~> 0.7.4"},
       {:surface_bulma, "~> 0.4.0"},
       {:timex, "~> 3.7"},
-      {:excoveralls, "~> 0.14.6"}
+      {:excoveralls, "~> 0.14.6"},
+      {:credo, "~> 1.6"}
     ]
   end
 

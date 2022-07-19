@@ -1,4 +1,9 @@
 defmodule MeetupAgendaWeb.EventLive.Agenda do
+
+  @moduledoc """
+    Agenda View Component for MeetupAgenda.
+  """
+
   use Surface.LiveComponent
 
   alias SurfaceBulma.Table

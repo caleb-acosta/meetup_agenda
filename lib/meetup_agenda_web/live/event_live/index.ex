@@ -1,4 +1,9 @@
 defmodule MeetupAgendaWeb.EventLive.Index do
+  
+  @moduledoc """
+    MeetupAgenda Root LiveView Module.
+  """
+
   use Surface.LiveView
 
   alias MeetupAgenda.AgendaService
@@ -78,12 +83,10 @@ defmodule MeetupAgendaWeb.EventLive.Index do
 
   def handle_event("prev_month", _, socket) do
     filter_month =
-      cond do
-        socket.assigns.filter_month.month == 1 ->
+      if socket.assigns.filter_month.month == 1 do
           %{month: 12, year: socket.assigns.filter_month.year - 1}
-
-        true ->
-          Map.update!(socket.assigns.filter_month, :month, &(&1 - 1))
+      else
+        Map.update!(socket.assigns.filter_month, :month, &(&1 - 1))
       end
 
     {:noreply,
@@ -94,12 +97,10 @@ defmodule MeetupAgendaWeb.EventLive.Index do
 
   def handle_event("next_month", _, socket) do
     filter_month =
-      cond do
-        socket.assigns.filter_month.month == 12 ->
+      if socket.assigns.filter_month.month == 12 do
           %{month: 1, year: socket.assigns.filter_month.year + 1}
-
-        true ->
-          Map.update!(socket.assigns.filter_month, :month, &(&1 + 1))
+      else
+        Map.update!(socket.assigns.filter_month, :month, &(&1 + 1))
       end
 
     {:noreply,
