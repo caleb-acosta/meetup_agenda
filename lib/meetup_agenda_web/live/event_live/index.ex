@@ -19,6 +19,7 @@ defmodule MeetupAgendaWeb.EventLive.Index do
   data(event, :map, default: %Event{})
   data(strict, :boolean, default: false)
   data(filter_month, :map, default: %{month: Timex.today().month, year: Timex.today().year})
+  data(view, :integer, default: 0)
 
   @impl true
   def handle_params(params, _url, socket) do
@@ -88,7 +89,7 @@ defmodule MeetupAgendaWeb.EventLive.Index do
       else
         Map.update!(socket.assigns.filter_month, :month, &(&1 - 1))
       end
-
+    Panel.set_tab(:panel, socket.assigns.view)
     {:noreply,
      socket
      |> assign(filter_month: filter_month)
@@ -102,7 +103,7 @@ defmodule MeetupAgendaWeb.EventLive.Index do
       else
         Map.update!(socket.assigns.filter_month, :month, &(&1 + 1))
       end
-
+    Panel.set_tab(:panel, socket.assigns.view)
     {:noreply,
      socket
      |> assign(filter_month: filter_month)
@@ -110,8 +111,9 @@ defmodule MeetupAgendaWeb.EventLive.Index do
   end
 
   def handle_event("switch_tab", %{"index" => index_str}, socket) do
-    Panel.set_tab(:panel, String.to_integer(index_str))
-    {:noreply, socket}
+    index = String.to_integer(index_str) |> IO.inspect
+    Panel.set_tab(:panel, index)
+    {:noreply, assign(socket, view: index)}
   end
 
   defp list_events(year, month) do

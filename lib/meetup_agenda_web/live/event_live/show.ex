@@ -6,7 +6,7 @@ defmodule MeetupAgendaWeb.EventLive.Show do
 
   use Surface.LiveComponent
 
-  alias Surface.Components.LivePatch
+  alias Surface.Components.{LivePatch, Link}
   alias MeetupAgendaWeb.Router.Helpers, as: Routes
 
   prop event, :map

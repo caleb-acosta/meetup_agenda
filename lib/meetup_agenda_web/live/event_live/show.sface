@@ -1,5 +1,5 @@
 <div>
-  <ul>
+  <ul class="my-4">
     <li>
       <strong>Title:</strong>
       {@event.title}
@@ -16,5 +16,17 @@
     </li>
   </ul>
 
-  <span><LivePatch to={Routes.event_index_path(@socket, :edit, @event)} class="button is-primary">Edit</LivePatch></span>
+  <LivePatch 
+    to={Routes.event_index_path(@socket, :edit, @event)} 
+    class="button is-primary">
+      Edit
+  </LivePatch>
+  <Link
+    class="button is-danger"
+    to={Routes.event_index_path(@socket, :index)}
+    click={"delete", target: :live_view}
+    values={id: @event.id}>
+      Delete
+  </Link>
+
 </div>
