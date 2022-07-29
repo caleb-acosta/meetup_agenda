@@ -120,7 +120,33 @@
 }
 
 .float{
-  position:fixed;
-  bottom:40px;
-  right:40px;
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+}
+
+.float-flash{
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+}
+
+.calendar-day{
+  width: calc(100% / 7);
+  min-height: 50px;
+}
+
+.calendar-day ul {
+  min-height: 50px;
+  max-width: 120px;
+}
+
+.calendar-day ul li {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.calendar-row {
+  width: 100%;
 }
