@@ -1,5 +1,4 @@
 defmodule MeetupAgendaWeb.EventLive.Agenda do
-
   @moduledoc """
     Agenda View Component for MeetupAgenda.
   """
@@ -8,7 +7,7 @@ defmodule MeetupAgendaWeb.EventLive.Agenda do
 
   alias SurfaceBulma.Table
   alias SurfaceBulma.Table.Column
-  alias Surface.Components.{LivePatch, Link}
+  alias Surface.Components.LivePatch
   alias MeetupAgendaWeb.Router.Helpers, as: Routes
 
   prop events, :list

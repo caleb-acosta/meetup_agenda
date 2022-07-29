@@ -16,17 +16,10 @@
     </li>
   </ul>
 
-  <LivePatch 
-    to={Routes.event_index_path(@socket, :edit, @event)} 
-    class="button is-primary">
-      Edit
+  <LivePatch to={Routes.event_index_path(@socket, :edit, @event)} class="button is-primary">
+    Edit
   </LivePatch>
-  <Link
-    class="button is-danger"
-    to={Routes.event_index_path(@socket, :index)}
-    click={"delete", target: :live_view}
-    values={id: @event.id}>
-      Delete
-  </Link>
-
+  <button class="button is-danger" :on-click={"delete", target: :live_view} :values={id: @event.id}>
+    Delete
+  </button>
 </div>

@@ -40,6 +40,6 @@
       </div>
       <ErrorTag field={:event_date} />
     </div>
-    <Submit class="button is-info mt-4" opts={[action: :new]}>Save</Submit>
+    <Submit class="button is-info mt-4">Save</Submit>
   </Form>
 </div>

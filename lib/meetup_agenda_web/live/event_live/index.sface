@@ -1,7 +1,7 @@
 {#if @live_action in [:new, :edit]}
   <Modal.Card show>
     <Modal.Header>
-      Title
+      {"#{@live_action |> Atom.to_string() |> String.capitalize()} event"}
     </Modal.Header>
     <FormComponent action={@live_action} id={:form} event={@event} strict={@strict} />
   </Modal.Card>
@@ -16,37 +16,36 @@
   </Modal.Card>
 {/if}
 
-<Panel id={:panel}>
+<Panel id={:panel} color="primary">
   <:title>Meetup Agenda</:title>
-  <Tab title="Agenda" click="switch_tab">
-    <TabItem>
+
+  <:header>
+    <div class="is-flex is-justify-content-space-around pt-4">
       <div class="is-flex is-justify-content-center">
         <Button click="prev_month">{"<"}</Button>
         <span class="is-size-5 has-text-grey-dark px-5">{@filter_month.month |> Timex.month_shortname()} {@filter_month.year}</span>
         <Button click="next_month">{">"}</Button>
       </div>
-      <div class="ml-auto">
+      <div>
         <Checkbox id={:strict} click="strict_mode" value={@strict}>Strict mode</Checkbox>
       </div>
-    </TabItem>
+    </div>
+  </:header>
+
+  <Tab title="Agenda" click="switch_tab">
     <TabItem>
       <Agenda id={:agenda} events={@events} />
     </TabItem>
   </Tab>
+
   <Tab title="Calendar" click="switch_tab">
-    <TabItem>
-      <div class="is-flex is-justify-content-center">
-        <Button click="prev_month">{"<"}</Button>
-        <span class="is-size-5 has-text-grey-dark px-5">{@filter_month.month |> Timex.month_shortname()} {@filter_month.year}</span>
-        <Button click="next_month">{">"}</Button>
-      </div>
-      <div class="ml-auto">
-        <Checkbox id={:strict} click="strict_mode" value={@strict}>Strict mode</Checkbox>
-      </div>
-    </TabItem>
     <TabItem>
       <Calendar id={:calendar} month={@filter_month} events={@events} />
     </TabItem>
   </Tab>
 </Panel>
+
 <span class="float"><LivePatch class="button is-primary" to={Routes.event_index_path(@socket, :new)}>New Event</LivePatch></span>
+
+<p :if={@flash} class="alert alert-info float-flash mb-0">{live_flash(@flash, :info)}</p>
+<p :if={@flash} class="alert alert-danger float-flash mb-0">{live_flash(@flash, :warning)}</p>

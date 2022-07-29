@@ -1,5 +1,4 @@
 defmodule MeetupAgendaWeb.EventLive.Index do
-  
   @moduledoc """
     MeetupAgenda Root LiveView Module.
   """
@@ -14,15 +13,15 @@ defmodule MeetupAgendaWeb.EventLive.Index do
   alias MeetupAgendaWeb.Router.Helpers, as: Routes
   alias MeetupAgendaWeb.EventLive.{Show, FormComponent, Agenda, Calendar}
 
-  data(today, :integer, default: Timex.today())
   data(events, :list, default: [])
-  data(event, :map, default: %Event{})
+  data(event, :map, default: %Event{event_date: Timex.today()})
   data(strict, :boolean, default: false)
-  data(filter_month, :map, default: %{month: Timex.today().month, year: Timex.today().year})
+  data(filter_month, :date, default: Timex.today() |> Timex.beginning_of_month())
   data(view, :integer, default: 0)
 
   @impl true
   def handle_params(params, _url, socket) do
+    Panel.set_tab(:panel, socket.assigns.view)
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
@@ -70,11 +69,16 @@ defmodule MeetupAgendaWeb.EventLive.Index do
   def handle_event("delete", %{"id" => id}, socket) do
     event = AgendaService.get_event!(id)
     {:ok, _} = AgendaService.delete_event(event)
+    Panel.set_tab(:panel, socket.assigns.view)
 
     {:noreply,
-     assign(socket,
+     socket
+     |> assign(live_action: :index)
+     |> assign(
        events: list_events(socket.assigns.filter_month.year, socket.assigns.filter_month.month)
-     )}
+     )
+     |> put_flash(:warning, "Event deleted successfully")
+     |> push_patch(to: Routes.event_index_path(socket, :index))}
   end
 
   def handle_event("modal_close", _, socket), do: {:noreply, assign(socket, live_action: :index)}
@@ -83,37 +87,27 @@ defmodule MeetupAgendaWeb.EventLive.Index do
     do: {:noreply, assign(socket, :strict, !socket.assigns.strict)}
 
   def handle_event("prev_month", _, socket) do
-    filter_month =
-      if socket.assigns.filter_month.month == 1 do
-          %{month: 12, year: socket.assigns.filter_month.year - 1}
-      else
-        Map.update!(socket.assigns.filter_month, :month, &(&1 - 1))
-      end
-    Panel.set_tab(:panel, socket.assigns.view)
-    {:noreply,
-     socket
-     |> assign(filter_month: filter_month)
-     |> assign(events: list_events(filter_month.year, filter_month.month))}
+    shift_filter_month(socket, -1)
   end
 
   def handle_event("next_month", _, socket) do
-    filter_month =
-      if socket.assigns.filter_month.month == 12 do
-          %{month: 1, year: socket.assigns.filter_month.year + 1}
-      else
-        Map.update!(socket.assigns.filter_month, :month, &(&1 + 1))
-      end
+    shift_filter_month(socket, 1)
+  end
+
+  def handle_event("switch_tab", %{"index" => index_str}, socket) do
+    index = String.to_integer(index_str)
+    Panel.set_tab(:panel, index)
+    {:noreply, assign(socket, view: index)}
+  end
+
+  def shift_filter_month(socket, months) do
+    filter_month = Timex.shift(socket.assigns.filter_month, months: months)
     Panel.set_tab(:panel, socket.assigns.view)
+
     {:noreply,
      socket
      |> assign(filter_month: filter_month)
      |> assign(events: list_events(filter_month.year, filter_month.month))}
-  end
-
-  def handle_event("switch_tab", %{"index" => index_str}, socket) do
-    index = String.to_integer(index_str) |> IO.inspect
-    Panel.set_tab(:panel, index)
-    {:noreply, assign(socket, view: index)}
   end
 
   defp list_events(year, month) do

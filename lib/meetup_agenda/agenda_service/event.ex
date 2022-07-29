@@ -1,5 +1,4 @@
 defmodule MeetupAgenda.AgendaService.Event do
-  
   @moduledoc """
   Event Ecto Schema.
   """

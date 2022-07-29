@@ -1,5 +1,4 @@
 defmodule MeetupAgendaWeb.Telemetry do
-
   @moduledoc false
 
   use Supervisor

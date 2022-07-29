@@ -19,7 +19,6 @@ defmodule MeetupAgendaWeb.Router do
 
     get "/", PageController, :index
 
-    live "/test", EventLive.TestPage
     live "/events", EventLive.Index, :index
     live "/events/new", EventLive.Index, :new
     live "/events/:id/edit", EventLive.Index, :edit

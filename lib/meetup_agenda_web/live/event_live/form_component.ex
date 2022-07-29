@@ -1,5 +1,4 @@
 defmodule MeetupAgendaWeb.EventLive.FormComponent do
- 
   @moduledoc """
     Form SurfaceComponent for MeetupAgenda.AgendaService.Event
   """
@@ -87,7 +86,7 @@ defmodule MeetupAgendaWeb.EventLive.FormComponent do
     |> Enum.at(ordinal_day - 1)
   end
 
-  defp ordinal_weekday(event_date) do
+  def ordinal_weekday(event_date) do
     Date.range(Timex.beginning_of_month(event_date), Timex.end_of_month(event_date))
     |> Enum.filter(&(Timex.weekday(&1) == Timex.weekday(event_date)))
     |> Enum.find_index(&(&1 == event_date))

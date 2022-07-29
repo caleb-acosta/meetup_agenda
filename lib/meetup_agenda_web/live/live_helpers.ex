@@ -1,5 +1,4 @@
 defmodule MeetupAgendaWeb.LiveHelpers do
-
   @moduledoc false
 
   import Phoenix.LiveView

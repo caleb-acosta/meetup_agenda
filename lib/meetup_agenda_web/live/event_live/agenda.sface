@@ -11,12 +11,11 @@
     </Column>
     <Column label="Actions">
       <LivePatch class="button is-info is-small" to={Routes.event_index_path(@socket, :edit, event)}>Edit</LivePatch>
-      <Link
+      <button
         class="button is-danger is-small"
-        to="#"
-        click={"delete", target: :live_view}
-        values={id: event.id}
-      >Delete</Link>
+        :on-click={"delete", target: :live_view}
+        :values={id: event.id}
+      >Delete</button>
     </Column>
   </Table>
 </div>
